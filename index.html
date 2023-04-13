@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css" />
+  <title>My AOS Lib - Milton Bernardo</title>
+</head>
+<body>
+  
+  <div style="height: 150vh;"></div>
+  <div data-mb="fade-up" class="block"></div>
+  <div style="height: 150vh;"></div>
+
+
+  <script>
+
+    const animationsEl = document.querySelectorAll("[data-mb]")
+    const options = {
+      root: null,
+      threshold: [0.25, 0.5, 0.75, 0.9]
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      
+      entries.forEach((entry) => {
+        console.log(entry.intersectionRatio)
+        if(entry.intersectionRatio > 0.5) {
+          
+          if(entry.target.dataset.mb == 'fade-up') {
+            entry.target.style.backgroundColor = "black";
+            entry.target.style.transform = "translateY(0px)"
+          }
+        }
+      });
+    }, options);
+
+    animationsEl.forEach((el) => observer.observe(el))
+  </script>
+
+</body>
+</html>
